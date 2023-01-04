@@ -1,4 +1,3 @@
-
 # -*- coding: utf-8 -*-
 """
 DEFINE CONFIG IN .env FILE & INITILIZE PARAMETRES HERE :)

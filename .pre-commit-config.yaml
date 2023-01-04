@@ -35,7 +35,7 @@ repos:
   - id: pylint
     name: pylint
     language: system
-    entry: pylint . ../wano_backend
+    entry: pylint . ../api_dashboard
     types: [python]
     always_run: true
     pass_filenames: false
