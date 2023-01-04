@@ -9,7 +9,6 @@ from flask_marshmallow import Marshmallow
 from app.utils.database import SESSION, engine
 
 
-
 app = Flask(__name__, template_folder="templates")
 CORS(app)
 ma = Marshmallow(app)

@@ -36,6 +36,7 @@ def selectqueryfetchone(query: str) -> str:
     except (ConnectionError) as err:
         raise ConnectionError("Problem connecting to database") from err
 
+
 def selectqueryfetchoneSteps(query: str):
     datebase = LocalProxy(get_db)
     cursor = datebase.cursor()
@@ -75,7 +76,7 @@ def selectquery(query):
         return None
 
 
-def selectquerySteps(query: str) :
+def selectquerySteps(query: str):
     database = LocalProxy(get_db)
     cursor = database.cursor()
     cursor.execute(query)
@@ -84,7 +85,6 @@ def selectquerySteps(query: str) :
     result = [dict(zip(sequence, action)) for action in actions]
     cursor.close()
     return result
-        
 
 
 def updatequery(query: str):
