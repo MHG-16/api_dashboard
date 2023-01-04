@@ -1,0 +1,9 @@
+[MASTER]
+disable=
+    C0114, # missing-module-docstring
+    C0115, # missing-class-docstring
+    C0116, # missing-functions-docstring
+    C0325, # Unnecessary parens after 'if' keyword (superfluous-parens)
+    E0401, # disable import-error
+    W0703, # disable general exception disable
+ignored-classe= scoped_session

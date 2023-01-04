@@ -1,0 +1,4 @@
+2023-01-04 15:03:33,469 root INFO log started
+2023-01-04 15:03:33,490 werkzeug INFO  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+2023-01-04 15:04:23,617 root INFO log started
+2023-01-04 15:04:23,633 werkzeug INFO  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
