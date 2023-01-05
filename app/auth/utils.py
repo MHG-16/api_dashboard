@@ -24,8 +24,7 @@ def update_token_by_email(email: str):
 
 
 def update_token_get_id_user(email: str) -> dict:
-    res = update_token_by_email(email)
-    if res:
+    if res := update_token_by_email(email):
         return (
             jsonify(
                 {
