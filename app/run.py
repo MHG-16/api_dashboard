@@ -7,11 +7,16 @@ from flask_swagger_ui import get_swaggerui_blueprint
 from flask_marshmallow import Marshmallow
 
 from app.utils.database import SESSION, engine
+from app.user.views import app as app_user
+from app.auth.views import app as app_auth
 
 
 app = Flask(__name__, template_folder="templates")
 CORS(app)
 ma = Marshmallow(app)
+
+app.register_blueprint(app_auth)
+app.register_blueprint(app_user, url_prefix="/user")
 
 
 # Handling error
@@ -62,7 +67,8 @@ def after_request(response):
 
 
 @app.teardown_request
-def teardown_db():
+def teardown_db(exception):
+    # pylint: disable=W0613
     database = g.pop("db", None)
     if database is not None:
         database.close()
@@ -70,3 +76,7 @@ def teardown_db():
         SESSION.close()
         engine.dispose()
     # session_sql_alchemy.rollback()
+
+
+if __name__ == "__main__":
+    app.run()

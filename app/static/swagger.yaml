@@ -1,0 +1,120 @@
+openapi: 3.0.0
+info:
+  description: Description des web services de Remoteprod
+  version: "1.0.0"
+  title: Admin Dashboard Documentation
+  termsOfService: "http://swagger.io/terms"
+  conatct:
+    email: "guibane.mohamedhedi@gmail.com"
+  license:
+    name: MIT License
+    url: 'https://opensource.org/licenses/MIT'
+tags:
+  - name : "authentication"
+    description: "<p> Cet Api contient un service web de login ayant comme des entrées username et password d'un user <br/> il génére un key token pour accéder les autre services web ."
+  - name : User
+    description: "list webservices of a user"
+paths:
+  "/login?":
+    post:
+      tags:
+      - authentication
+      summary: Avoir token pour pouvoir exécuter les autres web services
+      parameters: []
+      security:
+      - basicAuth: []
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Échoué. Demande mal comprise
+        '401':
+          description: Api key invalide
+          ref: "#/compnents/responses/UnauthorizedError"
+        '404':
+          description: Demande introuvable
+        '500':
+          description: Erreur de serveur
+  "/logout?":
+    get:
+      tags:
+      - authentication
+      summary: Déconnecter la session en cours
+      parameters: []
+      security:
+      - acess_Token: []
+      responses:
+        '200':
+          description: Deconnected
+  "/user/create":
+    post:
+      tags:
+      - User
+      summary: Creation d'un nouveau utilisateur
+      requestBody:
+        required: true
+        content:
+            application/json:
+              schema:
+                type: object
+                required:
+                    - first_name
+                    - last_name
+                    - email
+                    - password
+                    - tel
+                    - genre
+                    - user_status
+                properties:
+                  first_name:
+                    type: "string"
+                    example: "Foobar"
+                  last_name:
+                    type: "string"
+                    example: "Foobar"
+                  email:
+                    type: "string"
+                    example: "Foobar@gmail.com"
+                  password:
+                    type: "string"
+                    example: "test"
+                  tel:
+                    type: "string"
+                  user_status:
+                    type: "integer"
+                    description: "User Status"
+                    default: 1
+                  date_of_birth:
+                    type: "string"
+                    example: "2000-01-06"
+                  genre:
+                    type: "string"
+                    example: "m"
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: Échoué. Demande mal comprise
+        "409":
+          description: Email existe
+        "500":
+          description: Erreur serveur
+
+components:
+  securitySchemes:
+    acess_Token:
+      type: apiKey
+      in: header
+      name: idSession
+    basicAuth:
+      type: http
+      scheme: basic
+  responses:
+    UnauthorizedError:
+      description: Authentication information is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
+            username: test
+            password: test

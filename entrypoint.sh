@@ -1,2 +1,2 @@
 #!/bin/bash
-exec gunicorn --config /usr/src/app/gunicorn_config.py wsgi:app
+exec gunicorn -b 0.0.0.0:8761 -w 4 --threads 4 -t 120 wsgi:app
