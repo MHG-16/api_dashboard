@@ -68,6 +68,7 @@ def after_request(response):
 
 @app.teardown_request
 def teardown_db(exception):
+    # pylint: disable=W0613
     database = g.pop("db", None)
     if database is not None:
         database.close()
@@ -75,3 +76,7 @@ def teardown_db(exception):
         SESSION.close()
         engine.dispose()
     # session_sql_alchemy.rollback()
+
+
+if __name__ == "__main__":
+    app.run()

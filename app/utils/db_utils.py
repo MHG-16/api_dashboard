@@ -30,14 +30,14 @@ def connexion():
 def selectqueryfetchone(query: str) -> str:
     """nonbuffered query fetch"""
     try:
-        return selectqueryfetchoneSteps(query)
+        return select_query_fetchone_steps(query)
     except (IndexError, TypeError):
         return None
     except (ConnectionError) as err:
         raise ConnectionError("Problem connecting to database") from err
 
 
-def selectqueryfetchoneSteps(query: str):
+def select_query_fetchone_steps(query: str):
     datebase = LocalProxy(get_db)
     cursor = datebase.cursor()
     cursor.execute(query)
@@ -68,7 +68,7 @@ def check_get_real_id(column_name: str, table_name: str, id_crypted: str):
 
 def selectquery(query):
     try:
-        return selectquerySteps(query)
+        return selectquery_steps(query)
     except (InterfaceError, OperationalError) as err:
         raise ConnectionError("Connection  to database error") from err
     except TypeError:
@@ -76,7 +76,7 @@ def selectquery(query):
         return None
 
 
-def selectquerySteps(query: str):
+def selectquery_steps(query: str):
     database = LocalProxy(get_db)
     cursor = database.cursor()
     cursor.execute(query)
@@ -90,7 +90,7 @@ def selectquerySteps(query: str):
 def updatequery(query: str):
     # pylint: disable=W0703
     try:
-        rowcount = updatequerySteps(query)
+        rowcount = updatequery_steps(query)
         return rowcount > 0
     except (ConnectionError) as err:
         raise ConnectionError("Problem connecting to database") from err
@@ -99,7 +99,7 @@ def updatequery(query: str):
         return None
 
 
-def updatequerySteps(query: str) -> int:
+def updatequery_steps(query: str) -> int:
     datebase = LocalProxy(get_db)
     cursor = datebase.cursor()
     cursor.execute(query)
